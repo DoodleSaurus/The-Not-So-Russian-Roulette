@@ -444,42 +444,73 @@ def shield_event():
 def snoop_dogg_event():
     global Snoopjoin, snoop, player1, player2
     
-    Animations.typewriter("A wild Snoop Dogg appeared!")
-    time.sleep(GAME_DELAY)
-    print("He loves playing Russian Roulette!")
-    time.sleep(GAME_DELAY)
+    if not Snoopjoin:
     
-    event_type = random.randint(1, 4)
-    if event_type == 1:
-        print("He takes a shot into the air and leaves!")
+        Animations.typewriter("A wild Snoop Dogg appeared!")
         time.sleep(GAME_DELAY)
-        target = random.choice([player1, player2])
-        print(f"The bullet fell back and hit {target.name}!")
+        print("He loves playing Russian Roulette!")
         time.sleep(GAME_DELAY)
-        target.take_damage(1)
-    elif event_type == 2:
-        print("He shoots both of you and leaves!")
-        time.sleep(GAME_DELAY)
-        player1.take_damage(1)
-        player2.take_damage(1)
-    elif event_type == 3:
-        print("He challenges both of you to a quick duel!")
-        time.sleep(1)
-        winner = random.choice([player1, player2])
-        print(f"{winner.name} was faster and shot Snoop Dogg!")
-        time.sleep(GAME_DELAY)
-        if snoop:
-            snoop.take_damage(1)
-    else:
-        if not Snoopjoin:  # Only join if not already in game
-            print("He decided to join the game and play along!")
+        
+        event_type = random.randint(1, 4)
+        if event_type == 1:
+            print("He takes a shot into the air and leaves!")
             time.sleep(GAME_DELAY)
-            Snoopjoin = True
-            if not snoop:
-                snoop = Player("Snoop Dogg", 3)
+            target = random.choice([player1, player2])
+            print(f"The bullet fell back and hit {target.name}!")
+            time.sleep(GAME_DELAY)
+            target.take_damage(1)
+        elif event_type == 2:
+            print("He shoots both of you and leaves!")
+            time.sleep(GAME_DELAY)
+            player1.take_damage(1)
+            player2.take_damage(1)
+        elif event_type == 3:
+            print("He challenges both of you to a quick duel!")
+            time.sleep(1)
+            winner = random.choice([player1, player2])
+            print(f"{winner.name} was faster and shot Snoop Dogg!")
+            time.sleep(GAME_DELAY)
+            if snoop:
+                snoop.take_damage(1)
         else:
-            print("Snoop Dogg is already here! He just watches this time.")
+            if not Snoopjoin:  # Only join if not already in game
+                print("He decided to join the game and play along!")
+                time.sleep(GAME_DELAY)
+                Snoopjoin = True
+                if not snoop:
+                    snoop = Player("Snoop Dogg", 3)
+            # else:
+            #     print("Snoop Dogg is already here! He just watches this time.")
+            #     time.sleep(GAME_DELAY)   
+    else:
+        Animations.typewriter("A wild Hatsune Miku appeared!")
+        time.sleep(GAME_DELAY)
+        print("Po-pi-po-pi-po-po-pi-po")
+        time.sleep(GAME_DELAY)
+        print("Po-pi-po-pi-po-po-pi-po")
+        time.sleep(GAME_DELAY)
+        
+        event_type = random.randint(1, 3)
+        if event_type == 1:
+            print("She throws her onion leek into the air!")
             time.sleep(GAME_DELAY)
+            target = random.choice([player1, player2, snoop])
+            print(f"The onion leek fell back and hit {target.name}!")
+            time.sleep(GAME_DELAY)
+            target.take_damage(1)
+        elif event_type == 2:
+            print("She hit both of you with her onion leek and leaves!")
+            time.sleep(GAME_DELAY)
+            player1.take_damage(1)
+            player2.take_damage(1)
+            snoop.take_damage(1)
+        else:
+            print("She challenges both of you to a quick duel!")
+            time.sleep(1)
+            winner = random.choice([player1, player2, snoop])
+            print(f"{winner.name} was faster and shot Hatsune Miku!")
+            time.sleep(GAME_DELAY)
+        
 
 def get_valid_input(prompt, valid_choices):
     """Get validated input from user"""
